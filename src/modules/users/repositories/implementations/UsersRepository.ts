@@ -42,7 +42,10 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    return this.users.find(user => user.admin === true);
+    receivedUser.admin = true;
+    receivedUser.updated_at = new Date();
+
+    return receivedUser;
   }
 
   list(): User[] {
