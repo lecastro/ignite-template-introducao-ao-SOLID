@@ -11,6 +11,10 @@ class CreateUserController {
       const { name, email } = request.body;
       const user = this.createUserUseCase.execute({ name, email });
 
+      if (typeof user === "undefined") {
+        return response.status(404).json({ error: 'user not found' });
+      }
+
       return response.status(201).json(user);
 
     } catch (error) {

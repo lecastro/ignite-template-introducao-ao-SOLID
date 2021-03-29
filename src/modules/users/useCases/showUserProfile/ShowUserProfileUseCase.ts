@@ -7,9 +7,14 @@ interface IRequest {
 
 class ShowUserProfileUseCase {
   constructor(private usersRepository: IUsersRepository) { }
-
   execute({ user_id }: IRequest): User {
-    return this.usersRepository.findById(user_id);
+    const user = this.usersRepository.findById(user_id);
+
+    if (typeof user === "undefined") {
+      throw new Error("Mensagem do erro");
+    }
+
+    return user;
   }
 }
 
